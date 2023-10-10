@@ -1,4 +1,4 @@
-package io.github.wldt.demo.digital;
+package it.unibo.iot.wldt.philips.digital;
 
 import it.wldt.adapter.digital.DigitalAdapter;
 import it.wldt.core.state.*;

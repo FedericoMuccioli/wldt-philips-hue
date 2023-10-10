@@ -1,4 +1,4 @@
-package io.github.wldt.demo.physical;
+package it.unibo.iot.wldt.philips.physical;
 
 public class DemoPhysicalAdapterConfiguration {
 

@@ -1,4 +1,4 @@
-package io.github.wldt.demo;
+package it.unibo.iot.wldt.philips;
 
 import it.wldt.adapter.digital.event.DigitalActionWldtEvent;
 import it.wldt.adapter.physical.PhysicalAssetDescription;

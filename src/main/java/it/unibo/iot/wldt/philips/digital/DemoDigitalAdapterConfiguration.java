@@ -1,4 +1,4 @@
-package io.github.wldt.demo.digital;
+package it.unibo.iot.wldt.philips.digital;
 
 public class DemoDigitalAdapterConfiguration {
 

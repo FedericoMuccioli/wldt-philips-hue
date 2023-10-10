@@ -1,4 +1,4 @@
-package io.github.wldt.demo.physical;
+package it.unibo.iot.wldt.philips.physical;
 
 import it.wldt.adapter.physical.*;
 import it.wldt.adapter.physical.event.PhysicalAssetActionWldtEvent;
@@ -17,21 +17,16 @@ import java.util.Random;
  * Date: 01/09/2023
  * Project: White Label Digital Twin Java Framework - (whitelabel-digitaltwin)
  */
-public class DemoPhysicalAdapter extends PhysicalAdapter {
+public class DemoConfPhysicalAdapter extends ConfigurablePhysicalAdapter<DemoPhysicalAdapterConfiguration> {
 
     private final static String TEMPERATURE_PROPERTY_KEY = "temperature-property-key";
     private final static String OVERHEATING_EVENT_KEY = "overheating-event-key";
     private final static String SET_TEMPERATURE_ACTION_KEY = "set-temperature-action-key";
 
-    private final static int MESSAGE_UPDATE_TIME = 1000;
-    private final static int MESSAGE_UPDATE_NUMBER = 10;
-    private final static double TEMPERATURE_MIN_VALUE = 20;
-    private final static double TEMPERATURE_MAX_VALUE = 30;
-
     private PhysicalAssetRelationship<String> insideInRelationship = null;
 
-    public DemoPhysicalAdapter(String id) {
-        super(id);
+    public DemoConfPhysicalAdapter(String id, DemoPhysicalAdapterConfiguration configuration) {
+        super(id, configuration);
     }
 
     @Override
@@ -133,13 +128,13 @@ public class DemoPhysicalAdapter extends PhysicalAdapter {
                 publishPhysicalAssetEventWldtEvent(new PhysicalAssetEventWldtEvent<>(OVERHEATING_EVENT_KEY, "normal"));
 
                 //Emulate the generation on 'n' temperature measurements
-                for(int i = 0; i < MESSAGE_UPDATE_NUMBER; i++){
+                for(int i = 0; i < getConfiguration().getMessageUpdateNumber(); i++){
 
                     //Sleep to emulate sensor measurement
-                    Thread.sleep(MESSAGE_UPDATE_TIME);
+                    Thread.sleep(getConfiguration().getMessageUpdateTime());
 
                     //Update the
-                    double randomTemperature = TEMPERATURE_MIN_VALUE + (TEMPERATURE_MAX_VALUE - TEMPERATURE_MIN_VALUE) * r.nextDouble();
+                    double randomTemperature = getConfiguration().getTemperatureMinValue() + (getConfiguration().getTemperatureMaxValue() - getConfiguration().getTemperatureMinValue()) * r.nextDouble();
 
                     //Create a new event to notify the variation of a Physical Property
                     PhysicalAssetPropertyWldtEvent<Double> newPhysicalPropertyEvent = new PhysicalAssetPropertyWldtEvent<>(TEMPERATURE_PROPERTY_KEY, randomTemperature);
